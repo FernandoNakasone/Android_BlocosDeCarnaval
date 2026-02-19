@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +16,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,22 +45,34 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+
+
 fun AppBlocosScreen(modifier: Modifier = Modifier) {
+
+    var blocoSelecionado by remember { mutableStateOf() }
+
+    val blocos : List<Bloco> = listOf(
+
+    )
+
     Box(
         modifier = Modifier.fillMaxSize()
-    ){
-        Column( modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center) {
+            verticalArrangement = Arrangement.Center
+        ) {
+
             Image(
                 painter = painterResource(R.drawable.carnaval),
-                contentDescription ="Imagem ilustrativa carnaval",
-
+                contentDescription = "Imagem ilustrativa carnaval",
             )
+
             Text(
-                "Data:" ,
+                "Data:",
                 fontSize = 24.sp,
                 color = Color(0xFF000007)
             )
@@ -82,6 +98,13 @@ fun AppBlocosScreen(modifier: Modifier = Modifier) {
         }
     }
 }
+
+data class Bloco(
+    @DrawableRes val imageResId: Int,
+    val data : String,
+    val nomeBloco : String,
+    val descricao : String
+)
 
 @Preview(showBackground = true)
 @Composable
